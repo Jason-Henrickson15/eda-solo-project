@@ -1,14 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 // GET
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   // Grabs notes that container the users ID
-  const user_id = req.body.user_id;
-  console.log('this is the ID', id);
+  console.log('this should be the user', req.user);
+  const user_id = req.user.id;
   const queryText = `SELECT * FROM "notes" WHERE "user_id"=$1;`;
-  pool.query(queryText, [id]).then((result) => {
+  pool.query(queryText, [user_id]).then((result) => {
       console.log('result from GET', result.rows);
       res.send(result.rows);
   }).catch((error) => {
@@ -18,10 +21,10 @@ router.get('/', (req, res) => {
 });
 
 // POST
-router.post('/note', (req, res) => {
+router.post('/note', rejectUnauthenticated, (req, res) => {
     // Creates a note
     console.log('this is the req.body', req.body);
-    const user_id = req.body.user_id;
+    const user_id = req.user.id;
     const car_id = req.body.car_id;
     const type = "note";
     const priority = req.body.priority;
@@ -39,10 +42,10 @@ router.post('/note', (req, res) => {
     })
 });
 
-router.post('/problem', (req, res) => {
+router.post('/problem', rejectUnauthenticated, (req, res) => {
     // Creates a problem
     console.log('this is the req.body', req.body);
-    const user_id = req.body.user_id;
+    const user_id = req.user.id;
     const car_id = req.body.car_id;
     const type = "problem";
     const priority = req.body.priority;
@@ -63,12 +66,12 @@ router.post('/problem', (req, res) => {
 });
 
 // PUT
-router.put('/note/:note_id', (req, res) => {
+router.put('/note/:note_id', rejectUnauthenticated, (req, res) => {
     // Allows you to edit a note
     console.log('this is the req.body', req.body);
     console.log('this is the id', req.params.note_id);
     const note_id = req.params.note_id;
-    const user_id = req.body.user_id;
+    const user_id = req.user.id;
     const newPriority = req.body.priority;
     const newTitle = req.body.title;
     const newText = req.body.text;
@@ -85,12 +88,12 @@ router.put('/note/:note_id', (req, res) => {
     })
 });
 
-router.put('/problem/:note_id', (req, res) => {
+router.put('/problem/:note_id', rejectUnauthenticated, (req, res) => {
     // Allows you to edit a note
     console.log('this is the req.body', req.body);
     console.log('this is the id', req.params.note_id);
     const note_id = req.params.note_id;
-    const user_id = req.body.user_id;
+    const user_id = req.user.id;
     const newPriority = req.body.priority;
     const newTitle = req.body.title;
     const newProblem = req.body.problem;
@@ -109,9 +112,9 @@ router.put('/problem/:note_id', (req, res) => {
 });
 
 // DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     // Delete selected note from database
-    const user_id = req.body.user_id
+    const user_id = req.user.id
     const id = req.params.id;
     const queryText = `DELETE FROM "notes" WHERE "user_id"=$1 AND "id"=$2;`;
     pool.query(queryText, [user_id, id])
