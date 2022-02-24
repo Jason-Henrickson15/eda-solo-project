@@ -7,6 +7,8 @@ function CreateNote() {
     // Allows the user to create a note to store in the database
 
     const [selectedYear, setSelectedYear] = useState('');
+    const [selectedMake, setSelectedMake] = useState('');
+    const [selectedModel, setSelectedModel] = useState('');
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -20,15 +22,22 @@ function CreateNote() {
     const models = useSelector(store => store.models);
 
     function getMakes(year) {
-        if (year!=='Select Year') {
+        if (year !== 'Select Year') {
             setSelectedYear(year);
             dispatch({ type: 'FETCH_MAKES', payload: year })
         }
     }
 
     function getModels(make) {
-        if (make!=='Select Model') {
-            dispatch({ type: 'FETCH_MODELS', payload: {year: selectedYear, make} })
+        if (make !== 'Select Model') {
+            setSelectedMake(make);
+            dispatch({ type: 'FETCH_MODELS', payload: { year: selectedYear, make } })
+        }
+    }
+
+    function setModel(model) {
+        if (model !== 'SELECT MODEL') {
+            setSelectedModel(model)
         }
     }
 
@@ -55,7 +64,7 @@ function CreateNote() {
                 })}
             </select>
 
-            <select>
+            <select onChange={(event) => setModel(event.target.value)}>
                 {/*Displays all Models depending on selected year and make*/}
                 <option>Select Model</option>
                 {models.map(model => {
