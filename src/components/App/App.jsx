@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreateDoc from '../CreateDocPage/CreateDocPage';
 import ViewNotes from '../ViewNotesPage/ViewNotesPage';
+import SubmitLandingPage from '../SubmitLandingPage/SubmitLandingPage';
 
 import './App.css';
 
@@ -65,9 +66,17 @@ function App() {
           <ProtectedRoute
             // logged in shows CreateNote page
             exact
-            path="/createNote"
+            path="/createDoc"
           >
             <CreateDoc />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // after submitting a document you will land on this page
+            exact
+            path="/submitLanding"
+          >
+            <SubmitLandingPage />
           </ProtectedRoute>
 
           <ProtectedRoute

@@ -2,19 +2,19 @@ import axios from 'axios';
 import { takeEvery } from 'redux-saga/effects';
 
 
-function* submitNote(action) {
+function* submitProblem(action) {
     try {
         console.log('this is the payload', action.payload);
-        yield axios.post('/api/notes/note', action.payload);
+        yield axios.post('/api/notes/problem', action.payload);
     }
     catch (error) {
-        console.log('ERROR in submitNoteSaga', error);
+        console.log('ERROR in submitProblemSaga', error);
     }
 
 }
 
 function* submitSaga() {
-    yield takeEvery('SUBMIT_NOTE', submitNote);
+    yield takeEvery('SUBMIT_PROBLEM', submitProblem);
 }
 
 export default submitSaga;

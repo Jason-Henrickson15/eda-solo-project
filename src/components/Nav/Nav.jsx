@@ -28,8 +28,8 @@ function Nav() {
               Home
             </Link>
 
-            <Link className="navLink" to="/createNote">
-              Create Note
+            <Link className="navLink" to="/createDoc">
+              Create Document
             </Link>
 
             <Link className="navLink" to="/viewNotes">

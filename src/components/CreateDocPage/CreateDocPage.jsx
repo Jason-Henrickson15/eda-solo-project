@@ -54,16 +54,15 @@ function CreateDoc() {
 
     const [form, setForm] = useState(<></>);
     function displayForm(option) {
-        const carObj = { id: carID, year: selectedYear, make: selectedMake, model: selectedModel }
-        console.log('this is the car obj', carObj);
+        // const carObj = { id: carID, year: selectedYear, make: selectedMake, model: selectedModel }
         if (option === 'Select Type') {
             setForm(<></>);
         }
         else if (option === 'Note') {
-            setForm(<CreateNoteForm carObj={carObj} />);
+            setForm(<CreateNoteForm carID={carID} />);
         }
         else if (option === 'Problem') {
-            setForm(<CreateProblemForm />);
+            setForm(<CreateProblemForm carID={carID}/>);
         }
     }
 
