@@ -5,6 +5,7 @@ import user from './user.reducer';
 import years from './years.reducer';
 import makes from './makes.reducer';
 import models from './models.reducer';
+import carID from './carID.reducer'
 
 
 // rootReducer is the primary reducer for our entire project
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   years,
   makes,
-  models
+  models,
+  carID
 });
 
 export default rootReducer;

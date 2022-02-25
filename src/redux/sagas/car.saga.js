@@ -20,7 +20,6 @@ function* fetchMakes(action) {
 }
 
 function* fetchModels(action) {
-    console.log('this is the payload', action.payload);
     try {
         const models = yield axios.get(`/api/car/model/${action.payload.year}/${action.payload.make}`);
         yield put({ type: 'SET_MODELS', payload: models.data });
@@ -29,10 +28,20 @@ function* fetchModels(action) {
     }
 }
 
+function* fetchID(action) {
+    try {
+        const id = yield axios.get(`/api/car/id/${action.payload.year}/${action.payload.make}/${action.payload.model}`);
+        yield put({ type: 'SET_ID', payload: id.data[0].id});
+    } catch (error) {
+        console.log('there was an error in fetchID saga', error);
+    }
+}
+
 function* carSaga() {
     yield takeEvery('FETCH_YEARS', fetchYears);
     yield takeEvery('FETCH_MAKES', fetchMakes);
     yield takeEvery('FETCH_MODELS', fetchModels);
+    yield takeEvery('FETCH_ID', fetchID);
 }
 
 export default carSaga;

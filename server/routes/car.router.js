@@ -33,7 +33,6 @@ router.get('/model/:year/:make', (req, res) => {
     // This route grabs all models with a certain year and make
     const year = req.params.year;
     const make = req.params.make;
-    console.log('this is the makes we are looking for', make);
     const queryText = `SELECT "year", "make", "model" FROM "cars" WHERE "year"=$1 AND "make"=$2
     GROUP BY "year","make","model";`;
     pool.query(queryText, [year, make]).then((result) => {
@@ -44,5 +43,21 @@ router.get('/model/:year/:make', (req, res) => {
         res.sendStatus(500);
     });
 });
+
+router.get('/id/:year/:make/:model', (req,res) => {
+    const year = req.params.year;
+    const make = req.params.make;
+    const model = req.params.model;
+    const queryText = `SELECT "id" FROM "cars" WHERE "year"=$1 AND "make"=$2 AND "model"=$3;`;
+    pool.query(queryText, [year, make, model])
+    .then((result) => {
+        console.log('GET id successful', result.rows);
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('ERROR getting car id', error);
+        res.sendStatus(500);
+    })
+
+})
 
 module.exports = router;

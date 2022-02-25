@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import CreateNote from '../CreateNotePage/CreateNotePage';
+import CreateDoc from '../CreateDocPage/CreateDocPage';
 import ViewNotes from '../ViewNotesPage/ViewNotesPage';
 
 import './App.css';
@@ -67,7 +67,7 @@ function App() {
             exact
             path="/createNote"
           >
-            <CreateNote />
+            <CreateDoc />
           </ProtectedRoute>
 
           <ProtectedRoute
