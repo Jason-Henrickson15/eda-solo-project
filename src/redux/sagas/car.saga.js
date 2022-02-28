@@ -32,6 +32,7 @@ function* fetchID(action) {
     try {
         const id = yield axios.get(`/api/car/id/${action.payload.year}/${action.payload.make}/${action.payload.model}`);
         yield put({ type: 'SET_ID', payload: id.data[0].id});
+        yield put({ type: 'FETCH_NOTES', payload: id.data[0].id});
     } catch (error) {
         console.log('there was an error in fetchID saga', error);
     }

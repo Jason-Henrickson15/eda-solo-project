@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CreateDoc from '../CreateDocPage/CreateDocPage';
 import ViewNotes from '../ViewNotesPage/ViewNotesPage';
 import SubmitLandingPage from '../SubmitLandingPage/SubmitLandingPage';
+import ViewDetailsPage from '../ViewDetailsPage/ViewDetailsPage';
 
 import './App.css';
 
@@ -80,11 +81,17 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
             exact
             path="/viewNotes"
           >
             <ViewNotes />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/viewDetails"
+          >
+            <ViewDetailsPage />
           </ProtectedRoute>
 
           <ProtectedRoute
