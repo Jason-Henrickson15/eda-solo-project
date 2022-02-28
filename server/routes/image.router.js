@@ -3,9 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET
-router.get('/', (req, res) => {
+router.get('/:noteID', (req, res) => {
   // GETs images
-  const note_id = req.body.note_id;
+  const note_id = req.params.noteID;
   const queryText = `SELECT * FROM "images" WHERE "note_id"=$1;`;
   pool.query(queryText, [note_id])
   .then((result) => {
@@ -34,12 +34,12 @@ router.post('/', (req, res) => {
 });
 
 // DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     // DELETE image
-    const image_id = req.params.id;
-    const user_id = req.body.id;
-    const queryText = `DELETE FROM "images" WHERE "user_id"=$1 AND "id"=$1;`;
-    pool.query(queryText, [user_id, image_id])
+    const note_id = req.params.id;
+    const user_id = req.user.id;
+    const queryText = `DELETE FROM "images" WHERE "user_id"=$1 AND "note_id"=$2;`;
+    pool.query(queryText, [user_id, note_id])
     .then((result) => {
         console.log('DELETE image success');
         res.sendStatus(200);

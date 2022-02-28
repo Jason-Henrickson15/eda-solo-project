@@ -52,41 +52,37 @@ function ViewNotes() {
     }
 
     function deleteNote(noteID) {
-        console.log('this is the note to be deleted', noteID);
+        dispatch({ type: 'DELETE_NOTE', payload: { noteID, car_id } })
     }
-
 
     // Conditionally rendering notes to display
-    const [noteDisplay, setNoteDisplay] = useState(<>nothing yet...</>);
+    const noteDisplay = true;
 
-    function viewNotes() {
-        console.log('this is the notes', notes);
-        setNoteDisplay(
-            <table>
-                <thead>
-                    <tr>
-                        <th>Note ID:</th>
-                        <th>Car ID:</th>
-                        <th>Note Title:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {notes.map(note => {
-                        return (
-                            <tr key={note.id}>
-                                <td>{note.id}</td>
-                                <td>{note.car_id}</td>
-                                <td>{note.title}</td>
-                                <td><button onClick={() => goToDetails(note.id)}>Details</button></td>
-                                <td><button onClick={() => deleteNote(note.id)}>Delete</button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-        )
-    }
-
+    const renderNotes =
+        <table>
+            <thead>
+                <tr>
+                    <th>Note ID:</th>
+                    <th>Car ID:</th>
+                    <th>Note Title:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {notes.map(note => {
+                    return (
+                        <tr key={note.id}>
+                            <td>{note.id}</td>
+                            <td>{note.car_id}</td>
+                            <td>{note.title}</td>
+                            <td><button onClick={() => goToDetails(note.id)}>Details</button></td>
+                            <td><button onClick={() => deleteNote(note.id)}>Delete</button></td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
+    
+    const hideNotes = <></>
 
     return (
         <>
@@ -120,12 +116,10 @@ function ViewNotes() {
                     )
                 })}
             </select>
-            <button onClick={viewNotes}>View Notes</button>
-
             <br />
 
             <div>
-                {noteDisplay}
+                {noteDisplay ? renderNotes : hideNotes}
             </div>
         </>
     )
