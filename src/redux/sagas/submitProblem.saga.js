@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
 
 function* submitProblem(action) {
     try {
         console.log('this is the payload', action.payload);
-        yield axios.post('/api/notes/problem', action.payload);
+        const id = yield axios.post('/api/notes/problem', action.payload);
+        console.log('this is the noteID in submitProblemSaga', id.data.id);
+        yield put({ type: 'SET_NOTEID', payload: id.data.id });
     }
     catch (error) {
         console.log('ERROR in submitProblemSaga', error);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
@@ -9,6 +9,7 @@ function CreateProblem({ carID }) {
     const history = useHistory();
 
     let images = [];
+    const [imageArray, setImageArray] = useState([]);
     const [imageCount, setImageCount] = useState(images.length);
     const [title, setTitle] = useState('');
     const type = "problem";
@@ -17,20 +18,33 @@ function CreateProblem({ carID }) {
     const [solution, setSolution] = useState('');
     const [solved, setSolved] = useState(false);
 
+    const noteID = useSelector(store => store.noteID)
+
     function submitProblem() {
+        console.log('in submitProblem');
         dispatch({ type: 'SUBMIT_PROBLEM', payload: {car_id: carID, title, type, priority, problem, solution, solved } })
-        // dispatch for imagePath goes here
-        history.push('/submitLanding')
+        setUpload(true);
+    }
+
+    function submitImage() {
+        console.log('this is the noteID in submitImage', noteID);
+        for (let path of imageArray) {
+            dispatch({ type: 'SUBMIT_IMAGE', payload: {path, noteID} })
+        }
+        // history.push('/submitLanding')
     }
 
     function populateImagesArr(path) {
         images.push(path);
-        setImageCount(images.length)
+        setImageArray(images);
+        setImageCount(images.length);
     }
 
     function uploadImages() {
+        console.log('in uploadImages');
         images = [];
         cloudinaryWidget();
+        setSubmitImagesBtn(true);
     }
 
     function cloudinaryWidget() {
@@ -52,12 +66,21 @@ function CreateProblem({ carID }) {
         ).open();
     }
 
+    const [upload, setUpload] = useState(false);
+    const displayUpload =
+    <>
+            <p>{imageCount} images selected</p>
+            <button onClick={uploadImages}>Upload Images</button>
+        </>
+    const hideUpload = <></>
+
+    const [submitImagesBtn, setSubmitImagesBtn] = useState(false);
+    const showBtn = <button onClick={submitImage}>Submit Images</button>
+    const hideBtn = <></>
+
     return (
         <>
             <h2>Create New Problem Form:</h2>
-            <p>{imageCount} images selected</p>
-            <button onClick={uploadImages}>Upload Images</button>
-            <br />
             <input placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
             <br />
             <textarea placeholder="Problem..." onChange={(event) => setProblem(event.target.value)} />
@@ -78,6 +101,8 @@ function CreateProblem({ carID }) {
                 <input onChange={(event) => setSolved(event.target.value)} value={false} type={"radio"} id="false" name="solved" /> <label htmlFor="false">Unsolved</label>
             </form>
             <button onClick={submitProblem}>Submit</button>
+            {upload ? displayUpload : hideUpload}
+            {submitImagesBtn ? showBtn : hideBtn}
         </>
     );
 }
