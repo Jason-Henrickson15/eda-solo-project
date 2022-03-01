@@ -61,11 +61,13 @@ router.post('/note', rejectUnauthenticated, (req, res) => {
     const text = req.body.text;
     const solved = req.body.solved;
     const queryText = `INSERT INTO "notes" ("user_id", "car_id", "type", "priority", "title", "text", "solved")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING "id";`;
     pool.query(queryText, [user_id, car_id, type, priority, title, text, solved])
         .then((result) => {
             console.log('POST successful to notes table', result);
-            res.sendStatus(200);
+            console.log('this is the returning id', result.rows[0].id);
+            res.send(result.rows[0]);
         }).catch((error) => {
             console.log('error POSTing to notes table', error);
             res.sendStatus(500);

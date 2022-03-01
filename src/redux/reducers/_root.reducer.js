@@ -8,6 +8,7 @@ import models from './models.reducer';
 import carID from './carID.reducer';
 import notes from './notes.reducer';
 import details from './details.reducer';
+import noteID from './noteID.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   models,
   carID,
   notes,
-  details
+  details,
+  noteID
 });
 
 export default rootReducer;

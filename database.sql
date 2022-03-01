@@ -21,6 +21,8 @@ CREATE TABLE "notes" (
 	"user_id" INTEGER REFERENCES "user",
 	"car_id" INTEGER REFERENCES "cars",
 	"type" VARCHAR(40) NOT NULL,
+	"priority" INTEGER NOT NULL,
+	"title" VARCHAR(80) NOT NULL,
 	"text" varchar(480),
 	"problem" VARCHAR(480),
 	"solution" VARCHAR(480),
@@ -30,5 +32,6 @@ CREATE TABLE "notes" (
 CREATE TABLE "images" (
 	"id" SERIAL PRIMARY KEY,
 	"path" varchar(240) NOT NULL,
-	"note_id" INTEGER REFERENCES "notes"
+	"note_id" INTEGER REFERENCES "notes",
+	"user_id" INTEGER REFERENCES "user" NOT NULL
 );

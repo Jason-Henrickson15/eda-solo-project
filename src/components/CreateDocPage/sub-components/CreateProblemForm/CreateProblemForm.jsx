@@ -8,6 +8,8 @@ function CreateProblem({ carID }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    let images = [];
+    const [imageCount, setImageCount] = useState(images.length);
     const [title, setTitle] = useState('');
     const type = "problem";
     const [priority, setPriority] = useState('');
@@ -21,13 +23,14 @@ function CreateProblem({ carID }) {
         history.push('/submitLanding')
     }
 
-    function test() {
-        console.log('this is the image path',imagePaths);
+    function populateImagesArr(path) {
+        images.push(path);
+        setImageCount(images.length)
     }
 
-    let imagePaths = []
-    function populatePaths(path) {
-        imagePaths.push(path)
+    function uploadImages() {
+        images = [];
+        cloudinaryWidget();
     }
 
     function cloudinaryWidget() {
@@ -43,7 +46,7 @@ function CreateProblem({ carID }) {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log('Done! Here is the image info: ', result.info);
-                    populatePaths(result.info.secure_url) // Send URLs
+                    populateImagesArr(result.info.secure_url) // Send URLs
                 }
             }
         ).open();
@@ -52,7 +55,8 @@ function CreateProblem({ carID }) {
     return (
         <>
             <h2>Create New Problem Form:</h2>
-            <button onClick={cloudinaryWidget}>Upload Images</button>
+            <p>{imageCount} images selected</p>
+            <button onClick={uploadImages}>Upload Images</button>
             <br />
             <input placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
             <br />
@@ -74,7 +78,6 @@ function CreateProblem({ carID }) {
                 <input onChange={(event) => setSolved(event.target.value)} value={false} type={"radio"} id="false" name="solved" /> <label htmlFor="false">Unsolved</label>
             </form>
             <button onClick={submitProblem}>Submit</button>
-            <button onClick={test}>click me</button>
         </>
     );
 }

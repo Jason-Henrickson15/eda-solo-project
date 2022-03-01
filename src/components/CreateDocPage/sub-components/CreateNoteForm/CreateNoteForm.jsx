@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -8,25 +9,41 @@ function CreateNote({ carID }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // const [imagePath, setImagePath] = useState([]);
-    let imagePaths = []
+    let images = [];
+    const [imageArray, setImageArray] = useState([]);
+    const [imageCount, setImageCount] = useState(images.length);
     const [title, setTitle] = useState('');
     const type = "note";
     const [priority, setPriority] = useState('');
     const [text, setText] = useState('');
 
-    function test() {
-        console.log('this is the image path',imagePaths);
-    }
+    const noteID = useSelector(store => store.noteID)
 
     function submitNote() {
+        console.log('in submitNote');
         dispatch({ type: 'SUBMIT_NOTE', payload: { car_id: carID, title, type, priority, text, solved: true } })
-        // dispatch for imagePath goes here
-        history.push('/submitLanding')
+        setUpload(true);
     }
 
-    function populatePaths(path) {
-        imagePaths.push(path)
+    function submitImage() {
+        console.log('this is the noteID in submitImage', noteID);
+        for (let path of imageArray) {
+            dispatch({ type: 'SUBMIT_IMAGE', payload: {path, noteID} })
+        }
+        // history.push('/submitLanding')
+    }
+
+    function populateImagesArr(path) {
+        images.push(path);
+        setImageArray(images);
+        setImageCount(images.length);
+    }
+
+    function uploadImages() {
+        console.log('in uploadImages');
+        images = [];
+        cloudinaryWidget();
+        setSubmitImagesBtn(true);
     }
 
     function cloudinaryWidget() {
@@ -42,18 +59,28 @@ function CreateNote({ carID }) {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log('Done! Here is the image info: ', result.info);
-                    populatePaths(result.info.secure_url) // Send URLs
+                    populateImagesArr(result.info.secure_url) // Send URLs
                 }
             }
         ).open();
     }
 
+    const [upload, setUpload] = useState(false);
+    const displayUpload =
+    <>
+            <p>{imageCount} images selected</p>
+            <button onClick={uploadImages}>Upload Images</button>
+        </>
+    const hideUpload = <></>
+
+    const [submitImagesBtn, setSubmitImagesBtn] = useState(false);
+    const showBtn = <button onClick={submitImage}>Submit Images</button>
+    const hideBtn = <></>
+
+
     return (
         <>
             <h2>Create New Note Form:</h2>
-            <button onClick={() => cloudinaryWidget()}>Upload Images</button>
-            {/* <input placeholder="Image path here" onChange={(event) => setImagePath(event.target.value)} /> */}
-            <br />
             <input placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
             <br />
             <textarea placeholder="Note..." onChange={(event) => setText(event.target.value)} />
@@ -67,7 +94,8 @@ function CreateNote({ carID }) {
                 <input onChange={(event) => setPriority(event.target.value)} value={1} type={"radio"} id="severe" name="priority" /> <label htmlFor="severe">Severe</label>
             </form>
             <button onClick={submitNote}>Submit</button>
-            <button onClick={test}>click me</button>
+            {upload ? displayUpload : hideUpload}
+            {submitImagesBtn ? showBtn : hideBtn}
         </>
     );
 }

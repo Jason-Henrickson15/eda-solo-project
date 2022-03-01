@@ -9,6 +9,7 @@ import submitProblemSaga from './submitProblem.saga';
 import getNotesSaga from './getNotes.saga';
 import getDetailsSaga from './getDetails.saga';
 import deleteSaga from './deleteNote.saga';
+import submitImageSaga from './submitImage.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     submitProblemSaga(),
     getNotesSaga(),
     getDetailsSaga(),
-    deleteSaga()
+    deleteSaga(),
+    submitImageSaga()
   ]);
 }

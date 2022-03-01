@@ -20,12 +20,13 @@ router.get('/:noteID', (req, res) => {
 // POST
 router.post('/', (req, res) => {
   // POSTs images
-  const note_id = req.body.note_id;
-  const image_path = req.body.image_path;
-  const queryText = `INSERT INTO "images" ("path", "note_id") VALUES ($1, $2);`;
-  pool.query(queryText, [image_path, note_id])
+  const note_id = req.body.noteID;
+  const image_path = req.body.path;
+  const user_id = req.user.id;
+  const queryText = `INSERT INTO "images" ("path", "note_id", "user_id") VALUES ($1, $2, $3);`;
+  pool.query(queryText, [image_path, note_id, user_id])
   .then((result) => {
-      console.log('POST to images success');
+      console.log('POST to images successful');
       res.sendStatus(200);
   }).catch((error) => {
       console.log('ERROR posting to images', error);
