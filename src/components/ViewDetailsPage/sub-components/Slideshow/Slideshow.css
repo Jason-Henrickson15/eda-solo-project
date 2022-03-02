@@ -1,0 +1,26 @@
+.imageContainer {
+    display: flex;
+    background-color: blue;
+    width: 500px;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto;
+}
+
+.slideShowImages {
+    width: 400px;
+}
+
+.slideShowBtn {
+    position: absolute;
+}
+
+.next {
+    left: 458px;
+}
+
+.prev {
+    left: 10px;
+}

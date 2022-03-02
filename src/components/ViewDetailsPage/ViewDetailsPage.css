@@ -1,0 +1,24 @@
+.infoContainer {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.titleContainer {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.textContainer {
+    border: 1px solid black;
+    height: 150px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.goBack {
+    height: 30px;
+}

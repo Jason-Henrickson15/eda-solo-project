@@ -1,7 +1,7 @@
 function SubmitLandingPage() {
     return (
         <>
-            nothing on landing page yet...
+            Note has been submitted!
         </>
     )
 }

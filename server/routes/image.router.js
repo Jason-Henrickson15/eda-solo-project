@@ -6,8 +6,9 @@ const router = express.Router();
 router.get('/:noteID', (req, res) => {
   // GETs images
   const note_id = req.params.noteID;
-  const queryText = `SELECT * FROM "images" WHERE "note_id"=$1;`;
-  pool.query(queryText, [note_id])
+  const user_id = req.user.id;
+  const queryText = `SELECT * FROM "images" WHERE "user_id"=$1 AND "note_id"=$2;`;
+  pool.query(queryText, [user_id, note_id])
   .then((result) => {
       console.log('GET images success', result);
       res.send(result.rows);

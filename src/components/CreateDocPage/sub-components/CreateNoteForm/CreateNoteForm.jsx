@@ -29,7 +29,7 @@ function CreateNote({ carID }) {
         for (let path of imageArray) {
             dispatch({ type: 'SUBMIT_IMAGE', payload: {path, noteID} })
         }
-        // history.push('/submitLanding')
+        history.push('/submitLanding')
     }
 
     function populateImagesArr(path) {

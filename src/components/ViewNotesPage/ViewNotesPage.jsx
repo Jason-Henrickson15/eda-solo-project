@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-
 function ViewNotes() {
     // Allows the user to view all notes sorted by the specific vehicle
     const [selectedYear, setSelectedYear] = useState('');
@@ -48,6 +47,7 @@ function ViewNotes() {
     function goToDetails(noteID) {
         console.log('this is the noteID', noteID);
         dispatch({ type: 'FETCH_DETAILS', payload: noteID });
+        dispatch({ type: 'FETCH_IMAGES', payload: noteID });
         history.push('/viewDetails');
     }
 
@@ -56,8 +56,6 @@ function ViewNotes() {
     }
 
     // Conditionally rendering notes to display
-    const noteDisplay = true;
-
     const renderNotes =
         <table>
             <thead>
@@ -82,8 +80,6 @@ function ViewNotes() {
             </tbody>
         </table>
     
-    const hideNotes = <></>
-
     return (
         <>
             <h1>Select vehicle to view notes</h1>
@@ -119,7 +115,7 @@ function ViewNotes() {
             <br />
 
             <div>
-                {noteDisplay ? renderNotes : hideNotes}
+                {renderNotes}
             </div>
         </>
     )

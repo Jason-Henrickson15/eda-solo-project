@@ -9,6 +9,7 @@ import carID from './carID.reducer';
 import notes from './notes.reducer';
 import details from './details.reducer';
 import noteID from './noteID.reducer';
+import images from './images.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   carID,
   notes,
   details,
-  noteID
+  noteID,
+  images
 });
 
 export default rootReducer;
