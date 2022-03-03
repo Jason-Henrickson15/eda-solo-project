@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import './ViewNotesPage.css';
+
+
 function ViewNotes() {
     // Allows the user to view all notes sorted by the specific vehicle
     const [selectedYear, setSelectedYear] = useState('');
@@ -79,11 +82,11 @@ function ViewNotes() {
                 })}
             </tbody>
         </table>
-    
+
     return (
         <>
             <h1>Select vehicle to view notes</h1>
-            <select onChange={(event) => getMakes(event.target.value)}>
+            <select className='ymmDropDown' onChange={(event) => getMakes(event.target.value)}>
                 {/*Displays all years as options*/}
                 <option>Select Year</option>
                 {years.map(year => {
@@ -93,7 +96,7 @@ function ViewNotes() {
                 })}
             </select>
 
-            <select onChange={(event) => getModels(event.target.value)}>
+            <select className='ymmDropDown' onChange={(event) => getModels(event.target.value)}>
                 {/*Displays all Makes depending on selected year*/}
                 <option>Select Make</option>
                 {makes.map(make => {
@@ -103,7 +106,7 @@ function ViewNotes() {
                 })}
             </select>
 
-            <select onChange={(event) => setModel(event.target.value)}>
+            <select className='ymmDropDown' onChange={(event) => setModel(event.target.value)}>
                 {/*Displays all Models depending on selected year and make*/}
                 <option>Select Model</option>
                 {models.map(model => {

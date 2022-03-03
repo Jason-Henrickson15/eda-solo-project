@@ -20,11 +20,14 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreateDoc from '../CreateDocPage/CreateDocPage';
-import ViewNotes from '../ViewNotesPage/ViewNotesPage';
 import SubmitLandingPage from '../SubmitLandingPage/SubmitLandingPage';
+import SubmitImagesPage from '../SubmitImagesPage/SubmitImagesPage';
+import ViewNotes from '../ViewNotesPage/ViewNotesPage';
 import ViewDetailsPage from '../ViewDetailsPage/ViewDetailsPage';
 
 import './App.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -73,7 +76,15 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // after submitting a document you will land on this page
+            // after submitting a document you will land on this page and be asked if you want to submit images
+            exact
+            path="/submitImages"
+          >
+            <SubmitImagesPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // after leaving submitImagesPage you will land here
             exact
             path="/submitLanding"
           >

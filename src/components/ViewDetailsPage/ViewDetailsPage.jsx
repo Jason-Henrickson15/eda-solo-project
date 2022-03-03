@@ -18,15 +18,7 @@ function ViewDetailsPage() {
                     <h2>{note?.title}</h2>
                 </div>
                 <div className='textContainer'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-                        id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-                        ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-                        interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-                        sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-                        elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-                        interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-                        Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-                        luctus. Duis a sapien metus.</p>
+                    <p>{note?.text}</p>
                 </div>
                 <p>Priority: {note?.priority}</p>
                 <button className='goBack' onClick={() => { history.goBack() }}>Go Back</button>

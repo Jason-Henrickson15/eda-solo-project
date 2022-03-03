@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateNoteForm from './sub-components/CreateNoteForm/CreateNoteForm.jsx';
 import CreateProblemForm from './sub-components/CreateProblemForm/CreateProblemForm.jsx';
 
+import './CreateDocPage.css';
+
 function CreateDoc() {
     // Allows the user to create a note to store in the database
     const [selectedYear, setSelectedYear] = useState('');
@@ -59,59 +61,61 @@ function CreateDoc() {
             setForm(<></>);
         }
         else if (option === 'Note') {
-            setForm(<CreateNoteForm carID={carID} />);
+            setForm(<CreateNoteForm carID={carID} setForm={setForm} />);
         }
         else if (option === 'Problem') {
-            setForm(<CreateProblemForm carID={carID}/>);
+            setForm(<CreateProblemForm carID={carID} setForm={setForm} />);
         }
     }
 
     // Conditional Renders
     const getType =
-        <>
+        <div className='selectorDocType'>
             <h3>Document Type:</h3>
-            <select onChange={(event) => displayForm(event.target.value)}>
+            <select className='typeDropDown' onChange={(event) => displayForm(event.target.value)}>
                 <option>Select Type</option>
                 <option>Note</option>
                 <option>Problem</option>
             </select>
-        </>
+        </div>
 
     const hideType = <></>
 
 
     return (
-        <>
+        <div className='createDocContainer'>
             <h1>Select vehicle to create note</h1>
-            <select onChange={(event) => getMakes(event.target.value)}>
-                {/*Displays all years as options*/}
-                <option>Select Year</option>
-                {years.map(year => {
-                    return (
-                        <option key={year.year}>{year.year}</option>
-                    )
-                })}
-            </select>
+            <div className='selectorContainer'>
+                <select className='ymmDropDown year' onChange={(event) => getMakes(event.target.value)}>
+                    {/*Displays all years as options*/}
+                    <option>Select Year</option>
+                    {years.map(year => {
+                        return (
+                            <option key={year.year}>{year.year}</option>
+                        )
+                    })}
+                </select>
 
-            <select onChange={(event) => getModels(event.target.value)}>
-                {/*Displays all Makes depending on selected year*/}
-                <option>Select Make</option>
-                {makes.map(make => {
-                    return (
-                        <option key={make.make}>{make.make}</option>
-                    )
-                })}
-            </select>
+                <select className='ymmDropDown' onChange={(event) => getModels(event.target.value)}>
+                    {/*Displays all Makes depending on selected year*/}
+                    <option>Select Make</option>
+                    {makes.map(make => {
+                        return (
+                            <option key={make.make}>{make.make}</option>
+                        )
+                    })}
+                </select>
 
-            <select onChange={(event) => setModel(event.target.value)}>
-                {/*Displays all Models depending on selected year and make*/}
-                <option>Select Model</option>
-                {models.map(model => {
-                    return (
-                        <option key={model.model}>{model.model}</option>
-                    )
-                })}
-            </select>
+                <select className='ymmDropDown model' onChange={(event) => setModel(event.target.value)}>
+                    {/*Displays all Models depending on selected year and make*/}
+                    <option>Select Model</option>
+                    {models.map(model => {
+                        return (
+                            <option key={model.model}>{model.model}</option>
+                        )
+                    })}
+                </select>
+            </div>
             <>
                 {askType ? getType : hideType}
             </>
@@ -119,7 +123,7 @@ function CreateDoc() {
             <>
                 {form}
             </>
-        </>
+        </div>
     )
 }
 

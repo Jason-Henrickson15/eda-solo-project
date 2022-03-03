@@ -1,0 +1,84 @@
+.submitImagesContainer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 200px;
+}
+
+.submitImagesForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    position: relative;
+    padding: 10px;
+    border: 3px solid rgb(255, 145, 0);
+    border-radius: 15px;
+}
+
+.selectImages, .selectImages:hover, .selectImages:active, .selectImages:visited {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background-color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
+}
+
+.imageCount {
+    position: relative;
+    bottom: -20px;
+}
+
+.submitImages, .submitImages:hover, .submitImages:active, .submitImages:visited {
+    margin-top: 10px;
+    background-color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
+}
+
+.continue, .continue:visited {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
+}
+
+.continue:hover, .continue:active {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    color: white !important;
+    border-color: rgb(255, 145, 0) !important;
+    background-color: rgb(255, 145, 0) !important;
+}
+
+.continue:focus, .selectImages:focus {
+    box-shadow: 0 0 0 0rem rgb(0 0 0 / 0%) !important;
+}
+
+.slideshowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-height: 300px;
+}
+
+.displayImagesContainer {
+    border: 5px solid rgb(255, 145, 0);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.prevImage {
+    width: 200px;
+}
+
+.arrow {
+    color: rgb(255, 145, 0);
+    font-size: 30px;
+    margin: 5px;
+}
+
+.arrow:onmouseover {
+    cursor: pointer;
+}
