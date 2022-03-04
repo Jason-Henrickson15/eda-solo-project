@@ -33,7 +33,7 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/viewNotes">
-              View Notes
+              View Documents
             </Link>
 
             <Link className="navLink" to="/info">

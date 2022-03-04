@@ -9,7 +9,7 @@ import './CreateNoteForm.css';
 import PrioritySelector from './sub-components/PrioritySelector/PrioritySelector';
 
 
-function CreateNote({ carID, setForm }) {
+function CreateNote({ carID }) {
 
     const dispatch = useDispatch();
     const history = useHistory();

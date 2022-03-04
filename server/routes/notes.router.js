@@ -144,6 +144,24 @@ router.put('/problem/:note_id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.put('/thumbnail/:note_id', rejectUnauthenticated, (req, res) => {
+    // Allows you to add a thumbail to a note
+    console.log('in thumbnail route');
+    console.log('body in thumbnail', req.body);
+    const user_id = req.user.id;
+    const note_id = req.params.note_id;
+    const thumbnail = req.body.thumbnail;
+    const queryText = `UPDATE "notes" SET "thumbnail"=$1 WHERE "user_id"=$2 AND "id"=$3;`;
+    pool.query(queryText, [thumbnail, user_id, note_id])
+        .then((result) => {
+            console.log('Added the thumbail to note', result);
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log('error adding thumbnail to note', error);
+            res.sendStatus(500);
+        })
+});
+
 // DELETE
 router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
     // Delete selected note from database

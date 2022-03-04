@@ -23,10 +23,11 @@ function SubmitImagesPage() {
     }
 
     function submitImage() {
-        console.log('this is the noteID in submitImage', noteID);
-        for (let path of imageArray) {
-            dispatch({ type: 'SUBMIT_IMAGE', payload: { path, noteID } })
-        }
+        // console.log('this is the noteID in submitImage', noteID);
+        // for (let path of imageArray) {
+        //     dispatch({ type: 'SUBMIT_IMAGE', payload: { path, noteID } })
+        // }
+        dispatch({ type: 'SUBMIT_THUMBNAIL', payload: { thumbnail: imageArray[0], noteID } })
         history.push('/submitLanding')
     }
 

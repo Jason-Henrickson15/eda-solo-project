@@ -10,6 +10,7 @@ import getNotesSaga from './getNotes.saga';
 import getDetailsSaga from './getDetails.saga';
 import deleteSaga from './deleteNote.saga';
 import submitImageSaga from './submitImage.saga';
+import submitThumbnailSaga from './submitThumbnail.saga';
 import getImagesSaga from './getImages.saga';
 
 // rootSaga is the primary saga.
@@ -31,6 +32,7 @@ export default function* rootSaga() {
     getDetailsSaga(),
     deleteSaga(),
     submitImageSaga(),
+    submitThumbnailSaga(),
     getImagesSaga()
   ]);
 }

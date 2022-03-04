@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import { Button } from 'react-bootstrap';
+
+import './CreateProblemForm.css';
+
+import SolvedSelector from './sub-components/SolvedSelector/SolvedSelector';
+import PrioritySelector from './sub-components/PrioritySelector/PrioritySelector';
+
+
 
 function CreateProblem({ carID }) {
 
@@ -16,93 +24,45 @@ function CreateProblem({ carID }) {
     const [priority, setPriority] = useState('');
     const [problem, setProblem] = useState('');
     const [solution, setSolution] = useState('');
-    const [solved, setSolved] = useState(false);
+    const [solved, setSolved] = useState();
 
     const noteID = useSelector(store => store.noteID)
 
     function submitProblem() {
         console.log('in submitProblem');
-        dispatch({ type: 'SUBMIT_PROBLEM', payload: {car_id: carID, title, type, priority, problem, solution, solved } })
-        setUpload(true);
-    }
-
-    function submitImage() {
-        console.log('this is the noteID in submitImage', noteID);
-        for (let path of imageArray) {
-            dispatch({ type: 'SUBMIT_IMAGE', payload: {path, noteID} })
+        if (title.length===0 || problem.length===0 || solution.length===0 || priority==='' || solved===undefined) {
+            alert('Must enter all data to continue')
         }
-        history.push('/submitLanding')
+        else {
+            dispatch({ type: 'SUBMIT_PROBLEM', payload: { car_id: carID, title, type, priority, problem, solution, solved } })
+            history.push('/submitImages')
+        }
     }
-
-    function populateImagesArr(path) {
-        images.push(path);
-        setImageArray(images);
-        setImageCount(images.length);
-    }
-
-    function uploadImages() {
-        console.log('in uploadImages');
-        images = [];
-        cloudinaryWidget();
-        setSubmitImagesBtn(true);
-    }
-
-    function cloudinaryWidget() {
-        console.log(process.env);
-        console.log('in image upload');
-        cloudinary.createUploadWidget({
-            sources: ['local'],    // CAN CHANGE TO ALLOW OTHER SOURCES THAN LOCAL FILES
-            multiple: true,       // REMOVE TO ALLOW MULTIPLE IMAGES
-            clientAllowedFormats: [],   // SET TO CORRECT FORMATS
-            cloudName: process.env.REACT_APP_CLOUDINARY_NAME,
-            uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-        },
-            (error, result) => {
-                if (!error && result && result.event === "success") {
-                    console.log('Done! Here is the image info: ', result.info);
-                    populateImagesArr(result.info.secure_url) // Send URLs
-                }
-            }
-        ).open();
-    }
-
-    const [upload, setUpload] = useState(false);
-    const displayUpload =
-    <>
-            <p>{imageCount} images selected</p>
-            <button onClick={uploadImages}>Upload Images</button>
-        </>
-    const hideUpload = <></>
-
-    const [submitImagesBtn, setSubmitImagesBtn] = useState(false);
-    const showBtn = <button onClick={submitImage}>Submit Images</button>
-    const hideBtn = <></>
 
     return (
         <>
-            <h2>Create New Problem Form:</h2>
-            <input placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
-            <br />
-            <textarea placeholder="Problem..." onChange={(event) => setProblem(event.target.value)} />
-            <br />
-            <textarea placeholder="Solution..." onChange={(event) => setSolution(event.target.value)} />
-            <br />
-            <form>
-                <h4>Priority:</h4>
-                <input onChange={(event) => setPriority(event.target.value)} value={3} type={"radio"} id="low" name="priority" /> <label htmlFor="low">Low</label>
-                <br/>
-                <input onChange={(event) => setPriority(event.target.value)} value={2} type={"radio"} id="moderate" name="priority" /> <label htmlFor="moderate">Moderate</label>
-                <br/>
-                <input onChange={(event) => setPriority(event.target.value)} value={1} type={"radio"} id="severe" name="priority" /> <label htmlFor="severe">Severe</label>
-                <br/>
-                <h4>Problem Status:</h4>
-                <input onChange={(event) => setSolved(event.target.value)} value={true} type={"radio"} id="true" name="solved" /> <label htmlFor="true">Solved</label>
-                <br/>
-                <input onChange={(event) => setSolved(event.target.value)} value={false} type={"radio"} id="false" name="solved" /> <label htmlFor="false">Unsolved</label>
-            </form>
-            <button onClick={submitProblem}>Submit</button>
-            {upload ? displayUpload : hideUpload}
-            {submitImagesBtn ? showBtn : hideBtn}
+            <h2>Create New Note Form:</h2>
+            <div className='createFormContainer'>
+                <input className='titleInput' placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
+                <br />
+                <textarea className='problemInput' placeholder="Problem..." onChange={(event) => setProblem(event.target.value)} />
+                <br />
+                <textarea className='solutionInput' placeholder="Solution..." onChange={(event) => setSolution(event.target.value)} />
+                <br />
+                <div className='solvedRadioContainer'>
+                    <h4 className='solvedRadioHead'>Status:</h4>
+                    <div className='solvedRadioBtns'>
+                        <SolvedSelector solved={solved} setSolved={setSolved}/>
+                    </div>
+                </div>
+                <div className='priorityRadioContainer'>
+                    <h4 className='priorityRadioHead'>Priority:</h4>
+                    <div className='priorityRadioBtns'>
+                        <PrioritySelector priority={priority} setPriority={setPriority} />
+                    </div>
+                </div>
+                <Button className='submitBtn' variant='primary' onClick={submitProblem}>Submit</Button>
+            </div>
         </>
     );
 }

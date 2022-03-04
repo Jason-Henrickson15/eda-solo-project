@@ -84,7 +84,7 @@ function CreateDoc() {
 
     return (
         <div className='createDocContainer'>
-            <h1>Select vehicle to create note</h1>
+            <h1>Select vehicle to create a document</h1>
             <div className='selectorContainer'>
                 <select className='ymmDropDown year' onChange={(event) => getMakes(event.target.value)}>
                     {/*Displays all years as options*/}

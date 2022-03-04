@@ -1,0 +1,7 @@
+.priorityToggleButton {
+    margin-right: 5px;
+}
+
+.priorityToggleButton:focus {
+    box-shadow: 0 0 0 0rem rgb(0 0 0 / 0%) !important;
+}
