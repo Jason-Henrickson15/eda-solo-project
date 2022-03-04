@@ -93,7 +93,7 @@ function ViewNotes() {
                     })}
                 </select>
 
-                <select className='ymmDropDown' onChange={(event) => setModel(event.target.value)}>
+                <select className='ymmDropDown model' onChange={(event) => setModel(event.target.value)}>
                     {/*Displays all Models depending on selected year and make*/}
                     <option>Select Model</option>
                     {models.map(model => {
@@ -102,12 +102,11 @@ function ViewNotes() {
                         )
                     })}
                 </select>
-                <Button variant="outline-secondary" className='getDocsBtn'>Get Documents</Button>
                 <br />
             </div>
 
             <div>
-                <BuildNotesList notes={notes}/>
+                <BuildNotesList notes={notes} goToDetails={goToDetails}/>
             </div>
         </div>
     )

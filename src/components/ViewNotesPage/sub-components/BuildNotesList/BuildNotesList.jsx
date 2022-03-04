@@ -1,6 +1,7 @@
 import './BuildNotesList.css';
 
-function BuildList({ notes }) {
+function BuildList({ notes, goToDetails }) {
+
 
     function checkPriority(priority) {
         if (priority === 1) {
@@ -21,13 +22,13 @@ function BuildList({ notes }) {
     }
 
     function checkType(note) {
-        if (note.type==='problem') {
-            if (note.solved===true) {
+        if (note.type === 'problem') {
+            if (note.solved === true) {
                 return (
                     <div className='status'>Status: {solved}</div>
                 )
             }
-            else if (note.solved===false) {
+            else if (note.solved === false) {
                 return (
                     <div className='status'>Status: {unsolved}</div>
                 )
@@ -43,11 +44,14 @@ function BuildList({ notes }) {
         <div className="listContainer">
             {notes.map(note => {
                 return (
-                    <div key={note.id} className="noteItem">
-                        <h3>Title: {note.title}</h3>
-                        <p className='priorityContainer'>Priority: {checkPriority(note.priority)}</p>
-                        <p className='typeContainer'>Type: {note.type}</p>
-                        {checkType(note)}
+                    <div onClick={() => goToDetails(note.id)} key={note.id} className="noteItem">
+                        <img className='thumbnail' src={note.thumbnail} />
+                        <div className='detailsContainer'>
+                            <h3>Title: {note.title}</h3>
+                            <p className='priorityContainer'>Priority: {checkPriority(note.priority)}</p>
+                            <p className='typeContainer'>Type: {note.type}</p>
+                            {checkType(note)}
+                        </div>
                     </div>
                 )
             })}

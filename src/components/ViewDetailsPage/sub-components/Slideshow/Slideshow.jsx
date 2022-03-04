@@ -35,6 +35,7 @@ function Slideshow() {
                 <button onClick={changeImageNext} className='slideShowBtn next'>{next}</button>
                 <button onClick={changeImagePrev} className='slideShowBtn prev'>{prev}</button>
             </div>
+            
         </>
     )
 }
