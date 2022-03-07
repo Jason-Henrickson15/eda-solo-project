@@ -21,7 +21,7 @@ function LandingPage() {
         <div className="grid-col grid-col_8">
           <p>
             TechNotes is the online solution for personal vehicle doucmentation. Making it easier than ever before to create, upload, and view
-            personal documentation about the selected vehicle.
+            personal documentation for the selected vehicle.
           </p>
         </div>
         <div className="grid-col grid-col_4">
