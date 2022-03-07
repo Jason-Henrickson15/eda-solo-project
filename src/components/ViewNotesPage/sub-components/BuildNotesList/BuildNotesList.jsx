@@ -1,9 +1,20 @@
 import './BuildNotesList.css';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Button } from 'react-bootstrap';
 
-function BuildList({ notes, goToDetails, checkDeleteNote }) {
+function BuildList({ notes, checkDeleteNote }) {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    function goToDetails(noteID) {
+        console.log('this is the noteID', noteID);
+        dispatch({ type: 'FETCH_DETAILS', payload: noteID });
+        dispatch({ type: 'FETCH_IMAGES', payload: noteID });
+        history.push('/viewDetails');
+    }
 
     function checkPriority(priority) {
         if (priority === 1) {

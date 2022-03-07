@@ -3,7 +3,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 function* fetchNotes(action) {
     try {
-        const notes = yield axios.get(`/api/notes/${action.payload}`);
+        const notes = yield axios.get(`/api/notes/vehicle/${action.payload}`);
         console.log('this is the new notes', notes.data);
         yield put({ type: 'SET_NOTES', payload: notes.data });
     } catch (error) {

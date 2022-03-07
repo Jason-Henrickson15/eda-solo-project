@@ -20,7 +20,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get('/:car_id', rejectUnauthenticated, (req, res) => {
+router.get('/vehicle/:car_id', rejectUnauthenticated, (req, res) => {
     // Grabs all notes that match the chosen vehicle
     const user_id = req.user.id;
     const car_id = req.params.car_id;
@@ -48,6 +48,19 @@ router.get('/details/:id', rejectUnauthenticated, (req,res) => {
         res.sendStatus(500);
     });
 });
+
+router.get('/recent', rejectUnauthenticated, (req,res) => {
+    // Gets the last 3 most recently created notes
+    const user_id = req.user.id;
+    const queryText = `SELECT * FROM "notes" WHERE "user_id"=$1 ORDER BY "id" desc LIMIT '1';`;
+    pool.query(queryText, [user_id]).then((result) => {
+        console.log('recent notes GET success', result);
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('ERROR getting recent notes', error);
+        res.sendStatus(500);
+    })
+})
 
 // POST
 router.post('/note', rejectUnauthenticated, (req, res) => {

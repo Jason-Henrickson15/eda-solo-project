@@ -64,13 +64,6 @@ function ViewNotes() {
         }
     }
 
-    function goToDetails(noteID) {
-        console.log('this is the noteID', noteID);
-        dispatch({ type: 'FETCH_DETAILS', payload: noteID });
-        dispatch({ type: 'FETCH_IMAGES', payload: noteID });
-        history.push('/viewDetails');
-    }
-
     const [noteToDelete, setNoteToDelete] = useState();
     const [deleteConfirm, setDeleteConfirm] = useState(false)
     function checkDeleteNote(noteID) {
@@ -134,7 +127,7 @@ function ViewNotes() {
             </div>
             {deleteConfirm ? deleteConfirmBox : <></>}
             <div>
-                <BuildNotesList notes={notes} goToDetails={goToDetails} checkDeleteNote={checkDeleteNote}/>
+                <BuildNotesList notes={notes} checkDeleteNote={checkDeleteNote}/>
             </div>
         </div>
     )

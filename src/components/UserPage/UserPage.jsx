@@ -1,18 +1,21 @@
-import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
+import './UserPage.css';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const user = useSelector((store) => store.user);
+
+  const history = useHistory();
+
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      <h1>Let's Get Started!</h1>
+      <div className='btnContainer'>
+        <Button className='btn' onClick={() => history.push('/createDoc')}>Create Document</Button>
+        <Button className='btn' onClick={() => history.push('/viewNotes')}>View Documents</Button>
+      </div>
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;

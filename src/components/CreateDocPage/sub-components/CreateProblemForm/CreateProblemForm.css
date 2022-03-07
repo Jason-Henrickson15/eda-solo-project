@@ -19,6 +19,7 @@
     border-radius: 10px;
     height: 100px;
     width: 300px;
+    padding: 5px;
 }
 
 .solvedRadioContainer, .priorityRadioContainer {
