@@ -19,13 +19,12 @@
     flex-direction: row;
 }
 
-.noteItem:hover {
-    cursor: pointer;
-}
-
 .thumbnail {
+    border: 1px solid white;
+    border-radius: 10px;
     width: 125px;
     max-height: 125px;
+    margin: 5px;
 }
 
 .priorityContainer {
@@ -45,7 +44,7 @@
 }
 
 .moderate {
-    color: yellow;
+    color: rgb(219, 219, 0);
     font-weight: bold;
     margin-left: 5px;
 }
@@ -74,4 +73,33 @@
     position: relative;
     top: -53px;
     right: -1px;
+}
+
+.detailsContainer {
+    width: 425px;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: flex-end;
+}
+
+.notesBtns {
+    height: 35px;
+    margin: 5px;
+}
+
+.details {
+    background-color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
+}
+
+.delete {
+    color: rgb(255, 145, 0) !important;
+    background-color: white !important;
+    border-color: rgb(255, 145, 0) !important;
+}
+
+.notesBtns:hover {
+    cursor: pointer;
 }

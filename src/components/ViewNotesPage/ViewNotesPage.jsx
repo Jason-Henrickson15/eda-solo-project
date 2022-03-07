@@ -37,12 +37,19 @@ function ViewNotes() {
             setSelectedModel('Select Year');
             dispatch({ type: 'FETCH_MAKES', payload: year });
         }
+        else if (year === 'Select Year') {
+            dispatch({ type: 'SET_MAKES', payload: [] });
+            dispatch({ type: 'SET_MODELS', payload: [] })
+        }
     }
 
     function getModels(make) {
-        if (make !== 'Select Model') {
+        if (make !== 'Select Make') {
             setSelectedMake(make);
             dispatch({ type: 'FETCH_MODELS', payload: { year: selectedYear, make } });
+        }
+        else if (make === 'Select Make') {
+            dispatch({ type: 'SET_MODELS', payload: [] });
         }
     }
 
@@ -52,10 +59,9 @@ function ViewNotes() {
             dispatch({ type: 'FETCH_ID', payload: { year: selectedYear, make: selectedMake, model } });
             setRenderNotes(false);
         }
-    }
-
-    function getThumbnail() {
-        console.log('getting thumbnail');
+        else if (model === 'Select Model') {
+            dispatch({ type: 'SET_NOTES', payload: [] })
+        }
     }
 
     function goToDetails(noteID) {
@@ -65,9 +71,31 @@ function ViewNotes() {
         history.push('/viewDetails');
     }
 
+    const [noteToDelete, setNoteToDelete] = useState();
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+    function checkDeleteNote(noteID) {
+        console.log('this is the selected id', noteID);
+        setDeleteConfirm(true);
+        setNoteToDelete(noteID);
+    }
+
     function deleteNote(noteID) {
+        setDeleteConfirm(false);
+        console.log('this would be the deleted note', noteID);
         dispatch({ type: 'DELETE_NOTE', payload: { noteID, car_id } })
     }
+
+    const deleteConfirmBox =
+        <div className='dimmer'>
+            <div className='confirmationBox'>
+                <h5>Are you sure you want to delete this note?</h5>
+                <p>This cannot be undone.</p>
+                <div className='deleteBtnContainer'>
+                    <Button onClick={() => deleteNote(noteToDelete)} className='confirmBtn confirmDelete'>Delete</Button>
+                    <Button className='confirmBtn confirmCancel'>Cancel</Button>
+                </div>
+            </div>
+        </div>
 
     return (
         <div className='viewDocContainer'>
@@ -104,9 +132,9 @@ function ViewNotes() {
                 </select>
                 <br />
             </div>
-
+            {deleteConfirm ? deleteConfirmBox : <></>}
             <div>
-                <BuildNotesList notes={notes} goToDetails={goToDetails}/>
+                <BuildNotesList notes={notes} goToDetails={goToDetails} checkDeleteNote={checkDeleteNote}/>
             </div>
         </div>
     )

@@ -25,17 +25,15 @@ function Slideshow() {
         }
     }
 
-    const next = '=>';
-    const prev = '<=';
-
     return (
         <>
             <div className='imageContainer'>
-                <img className='slideShowImages' src={images[index]?.path} />
-                <button onClick={changeImageNext} className='slideShowBtn next'>{next}</button>
-                <button onClick={changeImagePrev} className='slideShowBtn prev'>{prev}</button>
+                <i onClick={changeImagePrev} className="bi bi-arrow-left-circle-fill arrow left"></i>
+                <div className='displayImagesContainer'>
+                    <img className="slideShowImages" src={images[index]?.path} />
+                </div>
+                <i onClick={changeImageNext} className="bi bi-arrow-right-circle-fill arrow right"></i>
             </div>
-            
         </>
     )
 }

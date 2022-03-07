@@ -30,7 +30,7 @@ function CreateProblem({ carID }) {
 
     function submitProblem() {
         console.log('in submitProblem');
-        if (title.length===0 || problem.length===0 || solution.length===0 || priority==='' || solved===undefined) {
+        if (title.length===0 || problem.length===0 || priority==='' || solved===undefined) {
             alert('Must enter all data to continue')
         }
         else {

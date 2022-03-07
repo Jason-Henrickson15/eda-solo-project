@@ -29,9 +29,10 @@ function CreateDoc() {
         if (year !== 'Select Year') {
             setSelectedYear(year);
             setAskType(false);
-            setSelectedMake('Select Year');
-            setSelectedModel('Select Year');
             dispatch({ type: 'FETCH_MAKES', payload: year });
+        }
+        else if (year === 'Select Year') {
+            dispatch({ type: 'SET_MAKES', payload: [] })
         }
     }
 
@@ -40,6 +41,9 @@ function CreateDoc() {
             setSelectedMake(make);
             setAskType(false);
             dispatch({ type: 'FETCH_MODELS', payload: { year: selectedYear, make } });
+        }
+        else if (make === 'Select Make') {
+            dispatch({ type: 'SET_MODELS', payload: [] })
         }
     }
 

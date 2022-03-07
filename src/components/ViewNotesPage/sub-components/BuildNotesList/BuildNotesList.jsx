@@ -1,6 +1,8 @@
 import './BuildNotesList.css';
 
-function BuildList({ notes, goToDetails }) {
+import { Button } from 'react-bootstrap';
+
+function BuildList({ notes, goToDetails, checkDeleteNote }) {
 
 
     function checkPriority(priority) {
@@ -44,13 +46,17 @@ function BuildList({ notes, goToDetails }) {
         <div className="listContainer">
             {notes.map(note => {
                 return (
-                    <div onClick={() => goToDetails(note.id)} key={note.id} className="noteItem">
+                    <div key={note.id} className="noteItem">
                         <img className='thumbnail' src={note.thumbnail} />
                         <div className='detailsContainer'>
                             <h3>Title: {note.title}</h3>
                             <p className='priorityContainer'>Priority: {checkPriority(note.priority)}</p>
                             <p className='typeContainer'>Type: {note.type}</p>
                             {checkType(note)}
+                        </div>
+                        <div className='buttonContainer'>
+                            <Button onClick={() => goToDetails(note.id)} className='notesBtns details'>View Details</Button>
+                            <Button onClick={() => checkDeleteNote(note.id)} className='notesBtns delete'>Delete</Button>
                         </div>
                     </div>
                 )

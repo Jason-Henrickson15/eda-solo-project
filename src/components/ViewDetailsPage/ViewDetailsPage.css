@@ -19,6 +19,30 @@
     overflow-y: scroll;
 }
 
+.textHeader {
+    color: rgb(255, 145, 0);
+}
+
+.severe {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.moderate {
+    color: rgb(219, 219, 0);
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.low {
+    color: green;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 .goBack {
-    height: 30px;
+    height: 30px !important;
+    background-color: rgb(255, 145, 0) !important;
+    border-color: rgb(255, 145, 0) !important;
 }
