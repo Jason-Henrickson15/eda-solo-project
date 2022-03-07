@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
@@ -5,6 +7,10 @@ import { useHistory } from 'react-router-dom';
 
 function SubmitLandingPage() {
     const history = useHistory();
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch({ type: 'SET_NOTES', payload: [] });
+    },[]);
     return (
         <>
             <Alert variant="success">

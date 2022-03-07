@@ -61,10 +61,12 @@
 
 .solved {
     color: green;
+    font-weight: bold;
 }
 
 .unsolved {
     color: red;
+    font-weight: bold;
 }
 
 .status {

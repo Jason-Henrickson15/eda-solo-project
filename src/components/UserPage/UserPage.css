@@ -4,11 +4,11 @@
     align-items: center;
 }
 
-h1 {
+.userPageHeader {
     color: rgb(255, 145, 0);
 }
 
-.btn {
+.userPageBtn {
     color: white !important;
     background-color: rgb(255, 145, 0) !important;
     border-color: rgb(255, 145, 0) !important;

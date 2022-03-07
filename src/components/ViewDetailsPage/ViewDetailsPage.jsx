@@ -5,12 +5,19 @@ import './ViewDetailsPage.css';
 
 import { Button } from 'react-bootstrap';
 
+import { useEffect } from 'react';
+
 function ViewDetailsPage() {
     const history = useHistory();
 
     const noteData = useSelector(store => store.details);
     const images = useSelector(store => store.images);
     const note = noteData[0];
+
+
+    useEffect(()=>{
+        console.log('this is the solution', note.solution);
+    },[]);
 
     function checkPriority(priority) {
         if (priority === 1) {
@@ -35,6 +42,8 @@ function ViewDetailsPage() {
             <h4 className='textHeader'>Text:</h4>
             <p>{note?.text}</p>
         </div>
+    
+    const noSol = <p>There is currently no solution for this problem.</p>
 
     const problemType =
         <>
@@ -44,7 +53,8 @@ function ViewDetailsPage() {
             </div>
             <div className='textContainer'>
                 <h4 className='textHeader'>Solution:</h4>
-                {note?.solution === null ? note?.solution : <p>There is currently no solution for this problem.</p>}
+                {() => checkSolution(note)}
+                {note.solution !== null ? note.solution : noSol}
             </div>
         </>
 
@@ -55,7 +65,7 @@ function ViewDetailsPage() {
                 <div className='titleContainer'>
                     <h2>{note?.title}</h2>
                 </div>
-                {note.problem===null ? noteType : problemType}
+                {note?.problem===null ? noteType : problemType}
                 {checkPriority(note?.priority)}
                 <Button className='goBack' onClick={() => { history.goBack() }}>Go Back</Button>
             </div>
