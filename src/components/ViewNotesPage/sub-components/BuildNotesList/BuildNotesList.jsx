@@ -16,6 +16,13 @@ function BuildList({ notes, checkDeleteNote }) {
         history.push('/viewDetails');
     }
 
+    function goToEditDetails(noteID) {
+        console.log('this is the noteID', noteID);
+        dispatch({ type: 'FETCH_DETAILS', payload: noteID });
+        dispatch({ type: 'FETCH_IMAGES', payload: noteID });
+        history.push('/editDetails');
+    }
+
     function checkPriority(priority) {
         if (priority === 1) {
             return (
@@ -67,8 +74,9 @@ function BuildList({ notes, checkDeleteNote }) {
                         </div>
                         <div className='buttonContainer'>
                             <Button onClick={() => goToDetails(note.id)} className='notesBtns details'>View Details</Button>
-                            <Button onClick={() => checkDeleteNote(note.id)} className='notesBtns delete'>Delete</Button>
+                            <Button onClick={() => goToEditDetails(note.id)} className='notesBtns edit'>Edit</Button>
                         </div>
+                        <i onClick={() => checkDeleteNote(note.id)} class="bi bi-trash deleteIcon"></i>
                     </div>
                 )
             })}

@@ -24,6 +24,7 @@ import SubmitLandingPage from '../SubmitLandingPage/SubmitLandingPage';
 import SubmitImagesPage from '../SubmitImagesPage/SubmitImagesPage';
 import ViewNotes from '../ViewNotesPage/ViewNotesPage';
 import ViewDetailsPage from '../ViewDetailsPage/ViewDetailsPage';
+import EditDetailsPage from '../EditDetailsPage/EditDetailsPage';
 
 import './App.css';
 
@@ -103,6 +104,13 @@ function App() {
             path="/viewDetails"
           >
             <ViewDetailsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/editDetails"
+          >
+            <EditDetailsPage />
           </ProtectedRoute>
 
           <ProtectedRoute

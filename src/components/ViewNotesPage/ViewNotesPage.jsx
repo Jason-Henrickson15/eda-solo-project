@@ -78,6 +78,10 @@ function ViewNotes() {
         dispatch({ type: 'DELETE_NOTE', payload: { noteID, car_id } })
     }
 
+    function deleteNoteCancel() {
+        setDeleteConfirm(false);
+    }
+
     const deleteConfirmBox =
         <div className='dimmer'>
             <div className='confirmationBox'>
@@ -85,7 +89,7 @@ function ViewNotes() {
                 <p>This cannot be undone.</p>
                 <div className='deleteBtnContainer'>
                     <Button onClick={() => deleteNote(noteToDelete)} className='confirmBtn confirmDelete'>Delete</Button>
-                    <Button className='confirmBtn confirmCancel'>Cancel</Button>
+                    <Button onClick={() => deleteNoteCancel()} className='confirmBtn confirmCancel'>Cancel</Button>
                 </div>
             </div>
         </div>

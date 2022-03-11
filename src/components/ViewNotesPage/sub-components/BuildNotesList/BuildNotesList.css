@@ -91,17 +91,28 @@
     margin: 5px;
 }
 
+.notesBtns:hover {
+    cursor: pointer;
+}
+
 .details {
     background-color: rgb(255, 145, 0) !important;
     border-color: rgb(255, 145, 0) !important;
 }
 
-.delete {
+.edit {
     color: rgb(255, 145, 0) !important;
     background-color: white !important;
     border-color: rgb(255, 145, 0) !important;
 }
 
-.notesBtns:hover {
+.deleteIcon {
+    position: relative;
+    right: 0;
+    font-size: 20px;
     cursor: pointer;
+}
+
+.deleteIcon:hover {
+    color: rgb(255, 145, 0);
 }
