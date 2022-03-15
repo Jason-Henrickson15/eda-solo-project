@@ -1,4 +1,4 @@
-const details = (state = [], action) => {
+const details = (state = {}, action) => {
     // Sets the id for the chosen vehicle
     switch (action.type) {
         case 'SET_DETAILS':

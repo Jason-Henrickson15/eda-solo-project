@@ -79,6 +79,6 @@
     margin: 5px;
 }
 
-.arrow:onmouseover {
+.arrow:hover {
     cursor: pointer;
 }

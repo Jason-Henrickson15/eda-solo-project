@@ -42,7 +42,7 @@ router.get('/details/:id', rejectUnauthenticated, (req,res) => {
     const queryText =  `SELECT * FROM "notes" WHERE "user_id"=$1 AND "id"=$2;`;
     pool.query(queryText, [user_id, note_id]).then((result) => {
         console.log('result from GET note details', result);
-        res.send(result.rows);
+        res.send(result.rows[0]);
     }).catch((error) => {
         console.log('ERROR getting note details', error);
         res.sendStatus(500);

@@ -14,6 +14,7 @@
 
 .slideShowBtn {
     position: absolute;
+    cursor: pointer;
 }
 
 .next {
